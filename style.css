@@ -136,45 +136,116 @@ ul { list-style: none; }
 .hero p { font-size: 1.2rem; margin-bottom: 30px; }
 
 /* =========================================
-   5. ABOUT SECTION
+   5. ABOUT SECTION (REVISI FIX TAMPILAN)
    ========================================= */
-.section-about { padding: 80px 0; background-color: #f9fbfd; }
-
-.about-container {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 50px; max-width: 1100px; margin: 0 auto; padding: 0 20px;
+.section-about { 
+    padding: 60px 0; 
+    background-color: #f9fbfd; 
 }
 
-.about-img-wrapper { position: relative; flex: 1; }
+.about-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 40px; 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 20px;
+    /* FIX UTAMA: Biarkan elemen turun ke bawah (stack) jika layar sempit */
+    flex-wrap: wrap; 
+}
+
+.about-img-wrapper { 
+    position: relative; 
+    /* Flex-basis 400px: Jika layar < 400px, dia akan ambil 100% width. Jika luas, dia bagi dua */
+    flex: 1 1 400px; 
+    width: 100%;
+    min-width: 280px; /* Mencegah gambar gepeng */
+    margin-bottom: 20px;
+}
+
 .about-img {
-    width: 100%; border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); object-fit: cover;
+    width: 100%; 
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    object-fit: cover;
+    /* Pastikan gambar tampil utuh */
+    display: block; 
 }
 
 .experience-badge {
-    position: absolute; bottom: -20px; right: -20px;
-    background-color: #007bff; color: white;
-    padding: 15px 25px; border-radius: 10px; text-align: center;
+    position: absolute; 
+    bottom: -20px; 
+    right: -10px; /* Sedikit geser agar tidak keluar layar di HP */
+    background-color: #007bff; 
+    color: white;
+    padding: 15px 20px; 
+    border-radius: 10px; 
+    text-align: center;
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    z-index: 2;
+    min-width: 140px;
 }
-.experience-badge .count { display: block; font-size: 1.5rem; font-weight: bold; }
-.experience-badge .text { font-size: 0.85rem; }
 
-.about-text { flex: 1; }
+.experience-badge .count { display: block; font-size: 1.4rem; font-weight: bold; }
+.experience-badge .text { font-size: 0.8rem; }
+
+.about-text { 
+    /* Sama seperti gambar, teks akan menyesuaikan ruang */
+    flex: 1 1 400px; 
+    min-width: 280px; 
+}
+
 .sub-title {
     color: #007bff; font-weight: 600; text-transform: uppercase;
     font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px;
 }
+
 .main-title {
-    font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;
+    font-size: 2.2rem; font-weight: 700; margin-bottom: 20px;
     color: #333; line-height: 1.2;
 }
-.description { color: #666; line-height: 1.6; margin-bottom: 30px; }
+
+.description { color: #666; line-height: 1.6; margin-bottom: 30px; text-align: justify; }
 
 .feature-list { list-style: none; padding: 0; margin-bottom: 30px; }
 .feature-list li { display: flex; align-items: flex-start; margin-bottom: 15px; }
-.icon-check { color: var(--success); font-size: 1.2rem; margin-right: 15px; margin-top: 5px; }
+.icon-check { color: var(--success); font-size: 1.2rem; margin-right: 15px; margin-top: 5px; flex-shrink: 0; }
 
+/* Styling Tombol di About */
+.about-text .btn-primary {
+    margin-top: 10px;
+}
+
+/* Penyesuaian Khusus Layar Kecil (Mobile) untuk merapikan teks */
+@media (max-width: 768px) {
+    .about-container {
+        /* Paksa turun dan tengah */
+        flex-direction: column; 
+        text-align: center;
+        gap: 50px;
+    }
+    
+    .about-img-wrapper {
+        margin-bottom: 30px;
+    }
+
+    .experience-badge {
+        /* Posisikan badge di tengah bawah saat mobile */
+        right: 50%;
+        transform: translateX(50%);
+        bottom: -25px;
+    }
+
+    .description {
+        text-align: center; /* Teks center di HP agar rapi */
+    }
+
+    .feature-list li {
+        justify-content: center; /* List check icon di tengah */
+        text-align: left;
+    }
+}
 /* =========================================
    6. MODERN PRODUCT DISPLAY (Hero Product)
    ========================================= */
@@ -218,7 +289,7 @@ ul { list-style: none; }
 .badge-pill {
     padding: 6px 16px; border-radius: 50px;
     font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1px; color: white;
+    letter-spacing: 1px; color: rgb(12, 66, 174);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .badge-pill.green { background: #10b981; }
@@ -556,8 +627,10 @@ ul { list-style: none; }
 }
 
 /* =========================================
-   11. FLOATING CART & FOOTER
+   11. FOOTER (REVISI FIX)
    ========================================= */
+
+/* Floating Cart (Tetap sama, tidak diubah) */
 .floating-cart {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--accent-color); color: white;
@@ -574,30 +647,155 @@ ul { list-style: none; }
     display: flex; justify-content: center; align-items: center; font-weight: bold;
 }
 
+/* --- FOOTER STYLE --- */
 footer {
-    background-color: #0f172a; color: #cbd5e1;
-    padding-top: 70px; font-size: 0.95rem;
+    background-color: #0f172a; /* Slate 900 (Gelap Elegan) */
+    color: #cbd5e1; /* Slate 300 (Abu terang, nyaman di mata) */
+    padding-top: 80px; 
+    font-size: 0.95rem;
+    margin-top: auto; /* Memastikan footer selalu di bawah jika konten sedikit */
 }
+
 .footer-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px; padding-bottom: 50px;
+    display: grid; 
+    /* Kolom otomatis: Min 250px. Jika layar sempit, turun ke bawah */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 50px; /* Jarak antar kolom lebih lega */
+    padding-bottom: 60px;
 }
-.footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 20px; }
+
+/* Kolom 1: Brand */
+.footer-logo { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    color: var(--white); 
+    margin-bottom: 20px; 
+    display: inline-block;
+}
 .footer-logo span { color: var(--accent-color); }
-.social-links { display: flex; gap: 15px; }
+
+.footer-desc {
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #94a3b8; /* Sedikit lebih gelap dari teks utama */
+}
+
+/* Social Icons */
+.social-links { display: flex; gap: 12px; }
 .social-links a {
     display: flex; justify-content: center; align-items: center;
-    width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
-    color: var(--white); border-radius: 50%; transition: 0.3s;
+    width: 45px; height: 45px; /* Sedikit lebih besar */
+    background: rgba(255, 255, 255, 0.05); /* Transparan halus */
+    color: var(--white); 
+    border-radius: 50%; 
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.social-links a:hover { background: var(--accent-color); transform: translateY(-3px); }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { color: #cbd5e1; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-.footer-links a:hover { color: var(--accent-color); padding-left: 5px; }
+.social-links a:hover { 
+    background: var(--accent-color); 
+    border-color: var(--accent-color);
+    transform: translateY(-5px); 
+}
 
-.copyright-bar { background-color: #020617; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-.copyright-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.85rem; }
+/* Kolom 2 & 3: Judul */
+.footer-col h3 { 
+    color: var(--white); 
+    font-size: 1.3rem; 
+    margin-bottom: 25px; 
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
 
+/* Garis hiasan di bawah judul */
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* Links List */
+.footer-links li { margin-bottom: 15px; }
+.footer-links a { 
+    color: #cbd5e1; 
+    transition: 0.3s; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+.footer-links a i { font-size: 0.8rem; color: var(--accent-color); }
+.footer-links a:hover { 
+    color: var(--white); 
+    padding-left: 8px; /* Efek geser kanan halus */
+}
+
+/* Contact Info */
+.contact-info li {
+    display: flex; 
+    align-items: flex-start; /* Icon tetap di atas meski teks panjang */
+    gap: 15px; 
+    margin-bottom: 20px;
+}
+.contact-info i { 
+    color: var(--accent-color); 
+    font-size: 1.2rem; 
+    margin-top: 5px; 
+    flex-shrink: 0; /* Icon tidak akan gepeng */
+}
+
+/* Copyright Section */
+.copyright-bar { 
+    background-color: #020617; /* Lebih gelap dari footer utama */
+    padding: 25px 0; 
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+}
+.copyright-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; 
+    font-size: 0.9rem; 
+    color: #64748b;
+}
+
+/* --- RESPONSIF FOOTER (FIX UNTUK HP) --- */
+@media (max-width: 768px) {
+    footer {
+        text-align: center; /* Rata tengah di HP agar rapi */
+    }
+
+    .footer-col h3::after {
+        left: 50%; /* Garis judul di tengah */
+        transform: translateX(-50%);
+    }
+
+    .social-links {
+        justify-content: center; /* Icon sosmed di tengah */
+    }
+
+    .footer-links a {
+        justify-content: center; /* Link navigasi di tengah */
+    }
+    
+    .contact-info li {
+        justify-content: center; /* Kontak info di tengah */
+        text-align: center;
+        flex-direction: column; /* Icon di atas, teks di bawah */
+        align-items: center;
+        gap: 5px;
+    }
+    .contact-info i { margin-top: 0; margin-bottom: 5px; }
+
+    .copyright-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
 /* =========================================
    12. MOBILE RESPONSIVE
    ========================================= */
