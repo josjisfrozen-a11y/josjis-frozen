@@ -1,0 +1,647 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    --primary-color: #1e3a8a; /* Biru Tua */
+    --accent-color: #f97316;  /* Oranye */
+    --text-color: #333;
+    --bg-light: #f3f4f6;
+    --white: #ffffff;
+    --success: #22c55e;
+    --danger: #dc2626;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--white);
+}
+
+a { text-decoration: none; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   2. GLOBAL COMPONENTS (Buttons & Sections)
+   ========================================= */
+.section { padding: 80px 0; }
+.section-title { text-align: center; margin-bottom: 50px; }
+.section-title h2 { color: var(--primary-color); font-size: 2.5rem; }
+.bg-light { background-color: var(--bg-light); }
+
+/* Standard Buttons */
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover { transform: scale(1.05); background: #e65100; }
+
+.btn-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+.btn-outline:hover { background: var(--bg-light); }
+
+/* Full Width Helper */
+.full-width { width: 100%; }
+
+/* =========================================
+   3. NAVIGATION BAR
+   ========================================= */
+.navbar {
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.logo span { color: var(--accent-color); }
+
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { color: var(--text-color); font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--accent-color); }
+
+.btn-nav {
+    background: var(--primary-color);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+.hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)), 
+                url('assets/banner-lele.png') no-repeat center/cover;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--white);
+    padding-top: 70px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 20px; }
+.hero p { font-size: 1.2rem; margin-bottom: 30px; }
+
+/* =========================================
+   5. ABOUT SECTION
+   ========================================= */
+.section-about { padding: 80px 0; background-color: #f9fbfd; }
+
+.about-container {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 50px; max-width: 1100px; margin: 0 auto; padding: 0 20px;
+}
+
+.about-img-wrapper { position: relative; flex: 1; }
+.about-img {
+    width: 100%; border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); object-fit: cover;
+}
+
+.experience-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background-color: #007bff; color: white;
+    padding: 15px 25px; border-radius: 10px; text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+.experience-badge .count { display: block; font-size: 1.5rem; font-weight: bold; }
+.experience-badge .text { font-size: 0.85rem; }
+
+.about-text { flex: 1; }
+.sub-title {
+    color: #007bff; font-weight: 600; text-transform: uppercase;
+    font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px;
+}
+.main-title {
+    font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;
+    color: #333; line-height: 1.2;
+}
+.description { color: #666; line-height: 1.6; margin-bottom: 30px; }
+
+.feature-list { list-style: none; padding: 0; margin-bottom: 30px; }
+.feature-list li { display: flex; align-items: flex-start; margin-bottom: 15px; }
+.icon-check { color: var(--success); font-size: 1.2rem; margin-right: 15px; margin-top: 5px; }
+
+/* =========================================
+   6. MODERN PRODUCT DISPLAY (Hero Product)
+   ========================================= */
+.section-product-display {
+    padding-top: 50px;
+    background-color: #fff;
+}
+
+.product-showcase {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: start; margin-bottom: 80px;
+}
+
+/* Left: Images */
+.showcase-left { display: flex; flex-direction: column; gap: 20px; }
+
+.main-image-box {
+    position: relative; aspect-ratio: 1 / 1;
+    background: #f8fafc; border-radius: 40px;
+    border: 1px solid #e2e8f0; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+    padding: 0; /* Pastikan padding 0 agar gambar full */
+}
+
+/* REVISI GAMBAR AGAR PRESISI */
+.product-hero-img {
+    width: 100%;        /* Full Width */
+    height: 100%;       /* Full Height */
+    object-fit: cover;  /* Memenuhi kotak tanpa sisa space */
+    z-index: 2;
+    transition: transform 0.5s;
+    border-radius: 40px;
+}
+.main-image-box:hover .product-hero-img { transform: scale(1.05); }
+
+.hero-badges {
+    position: absolute; top: 25px; left: 25px;
+    display: flex; flex-direction: column; gap: 10px; z-index: 3;
+}
+.badge-pill {
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.badge-pill.green { background: #10b981; }
+.badge-pill.blue { background: #2563eb; }
+
+.thumb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.thumb-item {
+    aspect-ratio: 1/1; background: #f8fafc;
+    border: 1px solid #e2e8f0; border-radius: 16px;
+    padding: 5px; cursor: pointer; transition: 0.2s; overflow: hidden;
+}
+.thumb-item:hover { border-color: #3b82f6; }
+.thumb-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+
+/* Right: Details */
+.showcase-right { display: flex; flex-direction: column; }
+.rating-box { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.stars { color: #fbbf24; font-size: 0.9rem; }
+.review-count { color: #64748b; font-size: 0.9rem; font-weight: 500; }
+
+.product-title {
+    font-size: 2.5rem; font-weight: 900; color: #0f172a;
+    line-height: 1.2; margin-bottom: 15px;
+}
+.product-desc {
+    font-size: 1.05rem; color: #475569;
+    line-height: 1.7; margin-bottom: 30px;
+}
+
+.price-box-featured {
+    background: #eff6ff; border: 1px solid #dbeafe;
+    border-radius: 24px; padding: 25px; margin-bottom: 30px;
+}
+.price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+.price-val { font-size: 2rem; font-weight: 900; color: #1d4ed8; }
+.price-unit { font-size: 0.9rem; color: #64748b; font-weight: 600; }
+.stock-status {
+    color: #2563eb; font-size: 0.75rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.5px; font-style: italic;
+}
+
+.features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+.feat-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px; background: #f8fafc;
+    border: 1px solid #e2e8f0; border-radius: 12px;
+}
+.feat-item i { color: #2563eb; font-size: 1.1rem; }
+.feat-item span { font-size: 0.9rem; font-weight: 600; color: #334155; }
+
+.specs-box { border-top: 1px solid #e2e8f0; padding-top: 25px; margin-bottom: 30px; }
+.specs-box h4 {
+    font-weight: 700; color: #0f172a; margin-bottom: 15px;
+    display: flex; align-items: center; gap: 8px;
+}
+.specs-box h4 i { color: #10b981; }
+.spec-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.9rem; margin-bottom: 8px;
+}
+.spec-row .label { color: #64748b; }
+.spec-row .val { font-weight: 700; color: #1e293b; }
+
+.action-area { display: flex; gap: 15px; margin-top: auto; flex-wrap: wrap; }
+.qty-selector {
+    display: flex; align-items: center;
+    border: 1px solid #e2e8f0; border-radius: 16px;
+    background: white; overflow: hidden;
+}
+.qty-selector button {
+    width: 50px; height: 50px; background: transparent;
+    border: none; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.2s;
+}
+.qty-selector button:hover { background: #f1f5f9; }
+.qty-selector span { width: 40px; text-align: center; font-weight: 800; font-size: 1.1rem; }
+
+.btn-pesan-wa {
+    flex: 1; background: #2563eb; color: white;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 30px; border-radius: 16px;
+    font-weight: 800; font-size: 1.1rem;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); transition: 0.2s;
+}
+.btn-pesan-wa:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+.more-detail-link { margin-top: 15px; text-align: center; }
+.more-detail-link a { color: #64748b; font-size: 0.85rem; text-decoration: underline; }
+
+/* Cooking Section */
+.cooking-section {
+    background: #0f172a; color: white;
+    padding: 80px 0; margin-top: 60px;
+    position: relative; overflow: hidden;
+}
+.cooking-header { text-align: center; margin-bottom: 60px; }
+.cooking-header h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; }
+.cooking-header p { color: #94a3b8; }
+.cooking-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.step-card { text-align: center; }
+.step-icon {
+    width: 70px; height: 70px; background: #2563eb; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin: 0 auto 25px auto;
+    transform: rotate(-5deg); transition: 0.3s;
+}
+.step-card:hover .step-icon { transform: rotate(5deg) scale(1.1); }
+.step-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+.step-card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.6; }
+
+/* =========================================
+   7. OLD PRODUCT GRID (Grid Daftar Produk Lain)
+   ========================================= */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+.card {
+    background: var(--white); border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden;
+    transition: 0.3s; text-align: center;
+}
+.card:hover { transform: translateY(-5px); }
+.product-card img { width: 100%; height: 200px; object-fit: cover; }
+.product-card h3 { padding: 15px; font-size: 1.1rem; }
+
+/* Product Overlay */
+.card-image-wrapper { position: relative; overflow: hidden; }
+.card-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(30, 58, 138, 0.8);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 15px; opacity: 0; transition: opacity 0.3s ease;
+}
+.product-card:hover .card-overlay { opacity: 1; }
+
+.btn-overlay {
+    padding: 10px 25px; border-radius: 25px; font-weight: bold;
+    cursor: pointer; text-decoration: none; transition: 0.2s;
+    font-size: 0.9rem; width: 140px;
+}
+.btn-preview { background: white; color: var(--primary-color); border: none; }
+.btn-checkout { background: var(--accent-color); color: white; border: none; }
+.btn-overlay:hover { transform: scale(1.05); }
+
+/* =========================================
+   8. RESELLER SECTION (Modern)
+   ========================================= */
+.section-reseller { padding: 80px 0; background-color: #f8fafc; }
+.reseller-header { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
+.reseller-header h2 { font-size: 2.5rem; color: #0f172a; font-weight: 800; margin-bottom: 15px; }
+.reseller-header .text-highlight { color: #2563eb; }
+.reseller-header p { font-size: 1.1rem; color: #475569; }
+
+.pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; align-items: center; max-width: 1100px; margin: 0 auto;
+}
+
+.pricing-card {
+    background: white; border-radius: 24px; border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 0;
+    display: flex; flex-direction: column; transition: transform 0.3s ease;
+    position: relative; height: 100%;
+}
+.pricing-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+/* Featured Card */
+.pricing-card.featured {
+    border: 2px solid #2563eb; box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
+    transform: scale(1.05); z-index: 10;
+}
+.pricing-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+
+.popular-badge {
+    position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+    background: #2563eb; color: white; padding: 5px 20px;
+    border-radius: 50px; font-size: 0.8rem; font-weight: bold;
+    display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    white-space: nowrap;
+}
+
+.card-content { padding: 30px 30px 0 30px; flex: 1; }
+.card-action { padding: 30px; margin-top: auto; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.icon-box {
+    width: 50px; height: 50px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.icon-box.light-blue { background: #eff6ff; color: #2563eb; }
+.icon-box.solid-blue { background: #2563eb; color: white; }
+
+.discount-badge {
+    background: #fef2f2; color: #dc2626; padding: 5px 12px;
+    border-radius: 8px; font-size: 0.8rem; font-weight: bold;
+}
+
+.pkg-name { font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 5px; }
+.pkg-tagline { color: #64748b; font-size: 0.9rem; margin-bottom: 25px; }
+
+.pkg-price-box { margin-bottom: 30px; }
+.original-price { display: block; text-decoration: line-through; color: #94a3b8; font-size: 0.9rem; }
+.final-price { font-size: 2.2rem; font-weight: 900; color: #0f172a; }
+
+.pkg-features ul { list-style: none; padding: 0; }
+.pkg-features li { display: flex; align-items: start; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; color: #475569; }
+.pkg-features i { color: #10b981; font-size: 1.1rem; margin-top: 2px; }
+.pkg-features i.check-blue { color: #2563eb; }
+
+/* Reseller Buttons */
+.btn-price-action {
+    width: 100%; padding: 15px; border-radius: 16px;
+    font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-size: 1rem;
+}
+.btn-dark { background: #0f172a; color: white; }
+.btn-dark:hover { background: #1e293b; }
+.btn-blue { background: #2563eb; color: white; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); }
+.btn-blue:hover { background: #1d4ed8; }
+
+.trust-badges {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    max-width: 800px; margin: 80px auto 0 auto; opacity: 0.7;
+}
+.trust-item {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-align: center; color: #1e3a8a;
+}
+.trust-item i { font-size: 2rem; }
+.trust-item span { font-size: 0.85rem; font-weight: bold; }
+
+/* =========================================
+   9. RETAIL & OTHER CTA
+   ========================================= */
+.retail-cta {
+    margin-top: 60px; padding: 40px; background: #fff;
+    border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    text-align: center; border: 1px solid #eee;
+}
+.retail-text h3 { color: var(--primary-color); font-size: 1.8rem; margin-bottom: 10px; }
+.retail-text p { color: #666; margin-bottom: 30px; }
+.retail-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+.btn-retail {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 12px 35px; border-radius: 50px; font-weight: bold;
+    color: white !important; transition: 0.3s; text-decoration: none;
+    font-size: 1.1rem; min-width: 220px;
+}
+.btn-retail:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.btn-shopee { background: #EE4D2D; border: 2px solid #EE4D2D; }
+.btn-shopee:hover { background: #d63f20; }
+.btn-wa { background: #25D366; border: 2px solid #25D366; }
+.btn-wa:hover { background: #1ebc57; }
+
+/* =========================================
+   10. MODAL SYSTEMS (Popup)
+   ========================================= */
+.modal {
+    display: none; position: fixed; z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    overflow: hidden; /* Prevent body scroll bleed */
+    background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+}
+.modal.show { display: flex; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+.modal-content {
+    background-color: #fefefe; margin: auto; padding: 0;
+    border-radius: 15px; width: 90%; max-width: 800px;
+    position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* --- REVISI TOMBOL CLOSE --- */
+.close-modal, .close-checkout, .close-reseller, .close-cart, .close-partner {
+    color: #aaa; cursor: pointer;
+    z-index: 9999 !important; /* Paksa Paling Atas */
+    position: absolute; top: 15px; right: 20px;
+    font-size: 28px; font-weight: bold; transition: 0.2s;
+    background: rgba(255, 255, 255, 0.8); /* Background sedikit agar terlihat */
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+.close-modal:hover { color: var(--danger); background: #fee2e2; }
+
+/* Layout Modal Produk Detail */
+.modal-body { display: flex; flex-direction: row; }
+.modal-img { flex: 1; background: #f3f4f6; }
+.modal-img img { width: 100%; height: 100%; object-fit: cover; min-height: 400px; }
+.modal-info { flex: 1; padding: 40px; text-align: left; }
+
+.modal-info h2 { color: var(--primary-color); margin-bottom: 10px; }
+.halal-badge { color: #22c55e; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+.price-tag { font-size: 2rem; color: var(--accent-color); font-weight: bold; margin-bottom: 20px; }
+.detail-section { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.nutrition-box { background: #eefff5; color: #065f46; padding: 10px; border-radius: 5px; font-size: 0.9rem; }
+
+.btn-modal-cart {
+    display: block; width: 100%; background: var(--primary-color);
+    color: white; text-align: center; padding: 15px;
+    border-radius: 10px; font-weight: bold; margin-top: 20px; transition: 0.3s;
+}
+.btn-modal-cart:hover { background: var(--accent-color); }
+
+/* Modal Cart & Checkout (Smaller) */
+.cart-content, .checkout-content { max-width: 500px; padding: 20px; }
+.modal-header { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+
+/* Modal Partnership (Wizard) */
+.modal-partnership { max-width: 700px; height: 90vh; display: flex; flex-direction: column; }
+.step-content { display: none; flex-direction: column; height: 100%; padding: 20px; }
+.step-content.active { display: flex; }
+.modal-header-simple { text-align: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.legal-scroll-box {
+    flex: 1; background: #f8fafc; border: 1px solid #ddd; padding: 20px;
+    overflow-y: auto; border-radius: 8px; margin-bottom: 20px;
+    font-size: 0.9rem; line-height: 1.6; text-align: justify;
+}
+.agreement-check {
+    background: #e0f2fe; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+    display: flex; gap: 10px; align-items: center; border: 1px solid #bae6fd;
+}
+.scrollable-form { flex: 1; overflow-y: auto; padding-right: 5px; }
+.btn-group-step { display: flex; gap: 15px; margin-top: auto; }
+
+/* Form Elements */
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #555; }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
+}
+.form-row { display: flex; gap: 15px; }
+.form-group.half { flex: 1; }
+.form-section-head {
+    background: #eee; padding: 8px 10px; border-radius: 5px;
+    margin: 15px 0 10px 0; font-weight: bold; color: #333;
+}
+
+/* =========================================
+   11. FLOATING CART & FOOTER
+   ========================================= */
+.floating-cart {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--accent-color); color: white;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+    cursor: pointer; z-index: 1000; transition: 0.3s;
+}
+.floating-cart:hover { transform: scale(1.1); }
+.cart-count {
+    position: absolute; top: -5px; right: -5px;
+    background: red; color: white; font-size: 12px;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-weight: bold;
+}
+
+footer {
+    background-color: #0f172a; color: #cbd5e1;
+    padding-top: 70px; font-size: 0.95rem;
+}
+.footer-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px; padding-bottom: 50px;
+}
+.footer-logo { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 20px; }
+.footer-logo span { color: var(--accent-color); }
+.social-links { display: flex; gap: 15px; }
+.social-links a {
+    display: flex; justify-content: center; align-items: center;
+    width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1);
+    color: var(--white); border-radius: 50%; transition: 0.3s;
+}
+.social-links a:hover { background: var(--accent-color); transform: translateY(-3px); }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { color: #cbd5e1; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+.footer-links a:hover { color: var(--accent-color); padding-left: 5px; }
+
+.copyright-bar { background-color: #020617; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.copyright-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.85rem; }
+
+/* =========================================
+   12. MOBILE RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    /* Navbar */
+    .hamburger { display: block; }
+    .nav-links {
+        position: fixed; background: var(--white); top: 70px; left: 0; width: 100%;
+        flex-direction: column; padding: 20px; text-align: center;
+        transform: translateY(-150%); transition: 0.3s; box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    .nav-links.active { transform: translateY(0); }
+
+    /* Hero */
+    .hero h1 { font-size: 2rem; }
+
+    /* Product Display */
+    .product-showcase { grid-template-columns: 1fr; gap: 40px; }
+    .product-title { font-size: 2rem; }
+    .cooking-steps { grid-template-columns: 1fr; gap: 40px; }
+    .action-area { flex-direction: column; }
+    .btn-pesan-wa { width: 100%; }
+
+    /* Reseller */
+    .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+    .pricing-card.featured { transform: scale(1); }
+    .trust-badges { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+
+    /* Retail */
+    .retail-cta { padding: 25px; margin-top: 40px; }
+    .retail-buttons { flex-direction: column; }
+    .btn-retail { width: 100%; }
+
+    /* Modal */
+    .modal-body { flex-direction: column; }
+    .modal-img img { height: 250px; min-height: auto; }
+    .modal-info { padding: 25px; }
+    .modal-content { width: 95%; margin: 20px auto; max-height: 90vh; overflow-y: auto; }
+
+    /* Footer */
+    .footer-grid { gap: 30px; }
+    .copyright-content { flex-direction: column; gap: 10px; text-align: center; }
+
+    /* Form */
+    .form-row { flex-direction: column; gap: 0; }
+    .form-row:nth-child(4) { flex-direction: row; gap: 10px; } /* RT/RW */
+}

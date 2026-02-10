@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Pusat - Josjis Frozen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <section id="loginPage" class="auth-container">
+        <div class="auth-box">
+            <h2>Admin<span>Panel</span></h2>
+            <p>Masuk sebagai Pusat Josjis Frozen</p>
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email Admin" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-auth">Masuk Sistem</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="dashboardArea" class="layout" style="display: none;">
+        
+        <aside class="sidebar">
+            <div class="brand">Josjis<span>Admin</span></div>
+            <ul class="menu">
+                <li class="active" onclick="showPage('mitra')"><i class="fas fa-users"></i> Data Mitra</li>
+                <li onclick="showPage('klaim')"><i class="fas fa-hand-holding-usd"></i> Validasi Klaim</li>
+                <li onclick="showPage('keuangan')"><i class="fas fa-chart-line"></i> Laporan Keuangan</li>
+                <li onclick="showPage('kursus')"><i class="fas fa-graduation-cap"></i> Kelola Kursus</li>
+            </ul>
+            <div class="logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h3>Halo, Admin Pusat 👋</h3>
+            </header>
+
+            <section id="page-mitra" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Manajemen Mitra</h2>
+                        <button class="btn-primary" onclick="openRegisterModal()">+ Buat Akun Mitra Baru</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nama Mitra / Toko</th>
+                                    <th>WhatsApp</th>
+                                    <th>Stok Terbeli</th>
+                                    <th>Stok Diklaim</th>
+                                    <th>Sisa Poin</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="partnersTable">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-klaim" class="page-section" style="display: none;">
+                <div class="card">
+                    <h2>Permintaan Klaim Reward</h2>
+                    <p>Daftar mitra yang mengajukan pencairan bonus.</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Mitra</th>
+                                    <th>Jumlah (Rp)</th>
+                                    <th>Rekening</th>
+                                    <th>Bukti Transfer</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="claimsTable">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-keuangan" class="page-section" style="display: none;">
+                <h2>Laporan Keuangan Kemitraan</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <small>Total Stok Terjual ke Mitra</small>
+                        <h3 id="totalStockSold">0 Pcs</h3>
+                    </div>
+                    <div class="stat-card">
+                        <small>Estimasi Omzet Pusat</small>
+                        <h3 id="totalRevenue">Rp 0</h3>
+                    </div>
+                    <div class="stat-card red">
+                        <small>Total Reward Dibayarkan</small>
+                        <h3 id="totalRewardPaid">Rp 0</h3>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3>Grafik Performa Kemitraan</h3>
+                    <div style="height: 300px;">
+                        <canvas id="adminChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-kursus" class="page-section" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Materi Kursus Mitra</h2>
+                        <button class="btn-primary" onclick="openCourseModal()">+ Upload Materi Baru</button>
+                    </div>
+                    <div id="courseList" class="course-grid">
+                        </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('registerModal')" class="close">&times;</span>
+            <h3>Buat Akun Mitra Baru</h3>
+            <form id="registerForm">
+                <label>Email Login</label>
+                <input type="email" id="regEmail" required>
+                <label>Password Awal</label>
+                <input type="text" id="regPassword" value="josjis123" required>
+                <label>Nama Pemilik</label>
+                <input type="text" id="regName" required>
+                <label>No. WhatsApp</label>
+                <input type="text" id="regPhone" required>
+                <label>Jenis Paket</label>
+                <select id="regPackage">
+                    <option value="Reseller Bisnis">Reseller Bisnis</option>
+                    <option value="Reseller Privat">Reseller Privat</option>
+                </select>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Buatkan Akun</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="stockModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('stockModal')" class="close">&times;</span>
+            <h3>Tambah Stok Mitra</h3>
+            <p>Menambah stok berarti menambah poin reward mitra.</p>
+            <form id="stockForm">
+                <input type="hidden" id="stockUserId">
+                <input type="hidden" id="stockCurrentTotal">
+                <label>Jumlah Pembelian (Pcs Lele Marinasi)</label>
+                <input type="number" id="stockQty" placeholder="Contoh: 50" required>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Update Stok</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal('courseModal')" class="close">&times;</span>
+            <h3>Upload Materi Baru</h3>
+            <form id="courseForm">
+                <label>Judul Materi</label>
+                <input type="text" id="courseTitle" required>
+                <label>Deskripsi Singkat</label>
+                <input type="text" id="courseDesc" required>
+                <label>Link Gambar (Thumbnail)</label>
+                <input type="text" id="courseImg" placeholder="https://..." required>
+                <label>Link Video/Modul</label>
+                <input type="text" id="courseLink" placeholder="Link YouTube / PDF" required>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Simpan Materi</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

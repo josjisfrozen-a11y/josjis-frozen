@@ -1,0 +1,94 @@
+    <div id="resellerModal" class="modal">
+        <div class="modal-content checkout-content">
+            <span class="close-modal close-reseller">&times;</span>
+            <div class="modal-header">
+                <h2>Formulir Mitra Reseller</h2>
+                <p>Bergabunglah bersama keluarga besar Josjis Frozen</p>
+            </div>
+            
+            <form id="resellerForm" class="checkout-form">
+                
+                <h4 class="form-section-title">Data Calon Mitra</h4>
+                <div class="form-group">
+                    <label>Nama Lengkap (Sesuai KTP)</label>
+                    <input type="text" id="resName" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Email Aktif</label>
+                        <input type="email" id="resEmail" placeholder="email@contoh.com" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>No. WhatsApp</label>
+                        <input type="tel" id="resPhone" placeholder="0812xxxx" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Pilihan Paket Kemitraan</label>
+                    <select id="resPackage" required>
+                        <option value="" disabled selected>-- Pilih Paket --</option>
+                        <option value="Reseller Gabut">Reseller Gabut (Min. 10pcs)</option>
+                        <option value="Reseller Privat">Reseller Privat (142k)</option>
+                        <option value="Reseller Bisnis">Reseller Bisnis (420k)</option>
+                    </select>
+                </div>
+
+                <h4 class="form-section-title">Lokasi Usaha/Jualan</h4>
+                <div class="form-group">
+                    <label>Provinsi</label>
+                    <input type="text" id="resProv" placeholder="Jawa Timur" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Kota/Kabupaten</label>
+                        <input type="text" id="resCity" placeholder="Surabaya" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>Kecamatan</label>
+                        <input type="text" id="resDistrict" placeholder="Sukolilo" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Kelurahan/Desa</label>
+                        <input type="text" id="resVillage" placeholder="Keputih" required>
+                    </div>
+                    <div class="form-group quarter">
+                        <label>RT</label>
+                        <input type="number" id="resRT" placeholder="01" required>
+                    </div>
+                    <div class="form-group quarter">
+                        <label>RW</label>
+                        <input type="number" id="resRW" placeholder="05" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Lengkap (Jalan, No. Rumah)</label>
+                    <textarea id="resStreet" rows="2" placeholder="Jl. Lele No 1..." required></textarea>
+                </div>
+
+                <h4 class="form-section-title">Pakta Integritas & Perjanjian</h4>
+                <div class="form-group">
+                    <div class="terms-box">
+                        <h5>SYARAT & KETENTUAN MITRA JOSJIS FROZEN</h5>
+                        <p>1. Mitra wajib menjaga nama baik brand Josjis Frozen.</p>
+                        <p>2. Harga jual ke konsumen disarankan mengikuti standar pusat (HET).</p>
+                        <p>3. Dilarang melakukan kecurangan atau manipulasi produk.</p>
+                        <p>4. Untuk paket "Reseller Bisnis", perlengkapan jualan adalah hak milik mitra.</p>
+                        <p>5. Retur barang hanya berlaku jika kerusakan dari pihak pengiriman atau cacat produksi dengan bukti video unboxing.</p>
+                        <p>6. Pembayaran paket kemitraan dilakukan LUNAS di awal.</p>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="resAgree" required>
+                    <label for="resAgree">Saya telah membaca, memahami, dan menyetujui seluruh syarat & ketentuan menjadi mitra Josjis Frozen.</label>
+                </div>
+
+                <button type="submit" class="btn-primary full-width" style="background: var(--primary-color);">
+                    <i class="fas fa-handshake"></i> Daftar Jadi Mitra Sekarang
+                </button>
+            </form>
+        </div>
+    </div>

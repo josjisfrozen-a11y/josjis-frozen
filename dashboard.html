@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra Josjis Frozen - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <section id="loginPage" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h2>Josjis<span>Frozen</span></h2>
+                <p>Portal Khusus Mitra Reseller</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Email Mitra</label>
+                    <input type="email" id="email" placeholder="contoh: mitra@josjis.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="******" required>
+                </div>
+                <button type="submit" class="btn-auth">Masuk Dashboard</button>
+            </form>
+            <p class="auth-footer">Belum jadi mitra? <a href="index.html#reseller">Daftar di sini</a></p>
+        </div>
+    </section>
+
+    <div id="dashboardArea" class="dashboard-layout" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-brand">Josjis<span>Partner</span></div>
+            <ul class="sidebar-menu">
+                <li class="active" onclick="showPage('home')"><i class="fas fa-home"></i> Home</li>
+                <li onclick="showPage('laporan')"><i class="fas fa-chart-pie"></i> Laporan</li>
+                <li onclick="showPage('kasir')"><i class="fas fa-cash-register"></i> Kasir POS</li>
+                <li onclick="showPage('course')"><i class="fas fa-graduation-cap"></i> Belajar</li>
+                <li onclick="showPage('payment')"><i class="fas fa-wallet"></i> Pembayaran</li>
+                <li onclick="showPage('profile')"><i class="fas fa-user"></i> Profil</li>
+            </ul>
+            <div class="sidebar-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="user-info"><span>Halo, <b id="userNameDisplay">Mitra</b> 👋</span></div>
+            </header>
+
+            <section id="page-home" class="page-section">
+                <div class="section-header">
+                    <h1>Ringkasan Hari Ini</h1>
+                    <p>Performa toko <b id="homeShopName">-</b></p>
+                </div>
+                <div class="finance-summary">
+                    <div class="widget-card reward-card">
+                        <div class="widget-icon"><i class="fas fa-gift"></i></div>
+                        <div class="widget-info">
+                            <h3>Poin Stok Aktif</h3>
+                            <div class="number" id="homeReward">0 Pcs</div> 
+                            <small id="homeRewardValue" style="color: #e0e7ff;">Menunggu data...</small> 
+                        </div>
+
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-icon green"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="widget-info"><h3>Omzet Total</h3><div class="number" id="homeOmzet">Rp 0</div><small>Akumulasi</small></div>
+                    </div>
+                    <div class="widget-card">
+                        <div class="widget-icon" style="background:#e0e7ff;color:#1e3a8a"><i class="fas fa-wallet"></i></div>
+                        <div class="widget-info"><h3>Laba Bersih</h3><div class="number" id="homeDisplayProfit">Rp 0</div><small>Real Profit</small></div>
+                    </div>
+                </div>
+                <div class="finance-content-grid" style="grid-template-columns:1fr; margin-top:20px;">
+                    <div class="expense-form-container" style="text-align:center; padding:40px;">
+                        <h3>Menu Cepat</h3>
+                        <div style="display:flex; gap:15px; justify-content:center; margin-top:20px;">
+                            <button class="btn-auth" style="width:auto; padding:12px 30px;" onclick="showPage('kasir')"><i class="fas fa-cash-register"></i> Kasir</button>
+                            <button class="btn-mini-outline" style="width:auto; padding:12px 30px;" onclick="showPage('laporan')">Lihat Laporan</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-laporan" class="page-section" style="display:none;">
+                <div class="section-header" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div><h1>Laporan & Analisa</h1><p>Data keuangan real-time.</p></div>
+                    <button class="btn-mini-outline" onclick="downloadReport()" style="border-color:#22c55e; color:#166534;">
+                        <i class="fas fa-file-download"></i> Download Excel
+                    </button>
+                </div>
+
+                <div class="finance-content-grid" style="margin-bottom:30px;">
+                    <div class="chart-container" style="position:relative; height:300px;">
+                        <h3>Grafik Keuangan</h3>
+                        <div style="height:220px; display:flex; justify-content:center;"><canvas id="profitChart"></canvas></div>
+                    </div>
+                    <div class="f-card profit" style="flex-direction:column; align-items:flex-start; justify-content:center;">
+                        <small style="color:#bfdbfe;">Total Keuntungan</small>
+                        <h2 id="reportProfit" style="font-size:2.5rem; margin:10px 0;">Rp 0</h2>
+                        <div style="display:flex; gap:15px; width:100%;">
+                            <div><small style="color:#bfdbfe;">Masuk</small><div id="reportIncome" style="font-weight:bold;">Rp 0</div></div>
+                            <div><small style="color:#bfdbfe;">Keluar</small><div id="reportExpense" style="font-weight:bold;">Rp 0</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="finance-content-grid">
+                    <div class="expense-form-container">
+                        <h3>Catat Pengeluaran</h3>
+                        <form id="expenseForm">
+                            <div class="input-group"><label>Keterangan</label><input type="text" id="expDesc" required></div>
+                            <div class="input-group"><label>Nominal (Rp)</label><input type="number" id="expAmount" required></div>
+                            <div class="input-group"><label>Tanggal</label><input type="date" id="expDate" required></div>
+                            <button type="submit" class="btn-expense">Simpan</button>
+                        </form>
+                    </div>
+                    <div class="transaction-history">
+                        <h3>Riwayat Transaksi</h3>
+                        <div class="table-responsive">
+                            <table class="table-clean">
+                                <thead><tr><th>Tgl</th><th>Ket</th><th>Tipe</th><th style="text-align:right;">Jml</th></tr></thead>
+                                <tbody id="transactionTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-kasir" class="page-section" style="display:none;">
+                <div class="pos-layout">
+                    <div class="pos-products">
+                        <div class="section-header">
+                            <h1>Kasir / POS <span id="kasirCountBadge" style="background:red; color:white; font-size:0.8rem; padding:2px 8px; border-radius:10px;"></span></h1>
+                            <p>Klik produk untuk menambah ke keranjang.</p>
+                        </div>
+                        <div class="pos-grid">
+                            <div class="pos-card" onclick="addToKasir('Lele Marinasi', 25000)">
+                                <div class="pos-img" style="background-image: url('https://placehold.co/150x150?text=Lele');"></div>
+                                <div class="pos-info">
+                                    <h4>Lele Marinasi</h4>
+                                    <div class="pos-price">Rp 25.000</div>
+                                </div>
+                            </div>
+                            <div class="pos-card" onclick="addToKasir('Abon Lele', 30000)">
+                                <div class="pos-img" style="background-image: url('https://placehold.co/150x150?text=Abon');"></div>
+                                <div class="pos-info">
+                                    <h4>Abon Lele</h4>
+                                    <div class="pos-price">Rp 30.000</div>
+                                </div>
+                            </div>
+                            <div class="pos-card" onclick="addToKasir('Sosis Lele', 20000)">
+                                <div class="pos-img" style="background-image: url('https://placehold.co/150x150?text=Sosis');"></div>
+                                <div class="pos-info">
+                                    <h4>Sosis Lele</h4>
+                                    <div class="pos-price">Rp 20.000</div>
+                                </div>
+                            </div>
+                            <div class="pos-card" onclick="addToKasir('Tulang Krispy', 15000)">
+                                <div class="pos-img" style="background-image: url('https://placehold.co/150x150?text=Tulang');"></div>
+                                <div class="pos-info">
+                                    <h4>Tulang Krispy</h4>
+                                    <div class="pos-price">Rp 15.000</div>
+                                </div>
+                            </div>
+                            <div class="pos-card" onclick="addToKasir('Kerupuk Lele', 12000)">
+                                <div class="pos-img" style="background-image: url('https://placehold.co/150x150?text=Kerupuk');"></div>
+                                <div class="pos-info">
+                                    <h4>Kerupuk Lele</h4>
+                                    <div class="pos-price">Rp 12.000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pos-sidebar">
+                        <div class="pos-cart-header">
+                            <h3>Pesanan Baru</h3>
+                            <button onclick="resetKasir()" style="color:red; background:none; border:none; cursor:pointer;"><i class="fas fa-trash"></i> Reset</button>
+                        </div>
+                        <ul id="kasirList" class="pos-cart-list">
+                            </ul>
+                        <div class="pos-cart-footer">
+                            <div class="pos-total">
+                                <span>Total Tagihan</span>
+                                <span id="totalKasir">Rp 0</span>
+                            </div>
+                            <button class="btn-auth btn-pay" onclick="processTransaction()">
+                                <i class="fas fa-check-circle"></i> Bayar & Simpan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+<section id="page-course" class="page-section" style="display:none;">
+    
+    <div class="header-box">
+        <h1>🎓 Josjis Academy</h1>
+        <p>Perpustakaan ilmu lengkap untuk menunjang kesuksesan bisnis Frozen Food Anda.</p>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterCourse('all')">Semua</button>
+        <button class="filter-btn" onclick="filterCourse('peternakan')">🐟 Peternakan</button>
+        <button class="filter-btn" onclick="filterCourse('bisnis')">💼 Bisnis & Mindset</button>
+        <button class="filter-btn" onclick="filterCourse('admin')">📝 Admin & Stok</button>
+        <button class="filter-btn" onclick="filterCourse('keuangan')">💰 Keuangan</button>
+        <button class="filter-btn" onclick="filterCourse('marketing')">📢 Marketing</button>
+        <button class="filter-btn" onclick="filterCourse('sales')">🤝 Teknik Jualan</button>
+        <button class="filter-btn" onclick="filterCourse('ecommerce')">📱 E-Commerce</button>
+    </div>
+
+    <div class="course-grid">
+
+        <div class="course-card filter-item peternakan" onclick="openCourse(this)"
+             data-title="Kenapa Lele Josjis Tidak Bau Tanah?"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Edukasi penting untuk menjawab keraguan konsumen. Penjelasan tentang sistem kolam terpal, manajemen air, dan pakan pelet premium yang membuat daging bersih."
+             data-pdf="Factsheet_Kualitas_Air.pdf">
+            <div class="card-thumb" style="background: #2c3e50;">
+                <i class="fas fa-water"></i>
+                <span class="badge-level">Product Knowledge</span>
+            </div>
+            <div class="card-body">
+                <h3>Rahasia Bebas Bau Tanah</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item peternakan" onclick="openCourse(this)"
+             data-title="Perbedaan Nila vs Gurame"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Panduan visual membedakan tekstur daging, kandungan lemak, dan saran masakan yang cocok untuk Nila dan Gurame agar Anda bisa merekomendasikan dengan tepat."
+             data-pdf="Matriks_Perbandingan_Ikan.pdf">
+            <div class="card-thumb" style="background: #2c3e50;">
+                <i class="fas fa-fish"></i>
+                <span class="badge-level">Product Knowledge</span>
+            </div>
+            <div class="card-body">
+                <h3>Bedanya Nila vs Gurame</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item bisnis" onclick="openCourse(this)"
+             data-title="Mindset Pengusaha Sukses"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Jangan mental krupuk! Materi ini membahas bagaimana membangun mental baja saat menghadapi penolakan dan tantangan bisnis di bulan pertama."
+             data-pdf="Ebook_Growth_Mindset.pdf">
+            <div class="card-thumb" style="background: #8e44ad;">
+                <i class="fas fa-brain"></i>
+                <span class="badge-level">Mindset</span>
+            </div>
+            <div class="card-body">
+                <h3>Mental Baja Reseller</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item bisnis" onclick="openCourse(this)"
+             data-title="Analisis SWOT Frozen Food"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Memahami Kekuatan, Kelemahan, Peluang, dan Ancaman bisnis ikan beku di wilayah Anda. Cara memetakan kompetitor di sekitar rumah."
+             data-pdf="Worksheet_SWOT.pdf">
+            <div class="card-thumb" style="background: #8e44ad;">
+                <i class="fas fa-chess"></i>
+                <span class="badge-level">Strategi</span>
+            </div>
+            <div class="card-body">
+                <h3>Analisis Persaingan</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item admin" onclick="openCourse(this)"
+             data-title="Manajemen Stok FIFO"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="First In First Out. Teknik mengatur isi freezer agar tidak ada produk lama yang tertimbun dan kadaluarsa. Kunci menjaga kualitas produk."
+             data-pdf="Kartu_Stok_Template.pdf">
+            <div class="card-thumb" style="background: #95a5a6;">
+                <i class="fas fa-boxes"></i>
+                <span class="badge-level">SOP Gudang</span>
+            </div>
+            <div class="card-body">
+                <h3>Atur Stok (Metode FIFO)</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item admin" onclick="openCourse(this)"
+             data-title="Packing Aman Pengiriman Sameday"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Tutorial membungkus paket untuk pengiriman ojol (Gojek/Grab) agar suhu tetap terjaga sampai ke tangan konsumen."
+             data-pdf="Checklist_Packing.pdf">
+            <div class="card-thumb" style="background: #95a5a6;">
+                <i class="fas fa-box-open"></i>
+                <span class="badge-level">Logistik</span>
+            </div>
+            <div class="card-body">
+                <h3>SOP Packing Kiriman</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item keuangan" onclick="openCourse(this)"
+             data-title="Cara Hitung HPP & Profit"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Rumus sederhana menentukan harga jual. Jangan sampai jualan laris tapi ternyata rugi di ongkos bensin dan listrik freezer."
+             data-pdf="Kalkulator_HPP.xlsx">
+            <div class="card-thumb" style="background: #27ae60;">
+                <i class="fas fa-calculator"></i>
+                <span class="badge-level">Basic Finance</span>
+            </div>
+            <div class="card-body">
+                <h3>Hitung Untung Rugi</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item keuangan" onclick="openCourse(this)"
+             data-title="Manajemen Arus Kas (Cashflow)"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Disiplin memisahkan 'Uang Modal', 'Uang Laba', dan 'Uang Jajan'. Tips agar modal bisa diputar kembali untuk restock barang."
+             data-pdf="Buku_Kas_Harian.xlsx">
+            <div class="card-thumb" style="background: #27ae60;">
+                <i class="fas fa-wallet"></i>
+                <span class="badge-level">Management</span>
+            </div>
+            <div class="card-body">
+                <h3>Pisah Rekening Bisnis</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item marketing" onclick="openCourse(this)"
+             data-title="Desain Poster Pakai Canva"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Tutorial membuat poster promo 'Jumat Berkah' atau 'Diskon Akhir Bulan' hanya menggunakan HP dengan aplikasi Canva gratis."
+             data-pdf="Template_Link_Canva.txt">
+            <div class="card-thumb" style="background: #e67e22;">
+                <i class="fas fa-palette"></i>
+                <span class="badge-level">Konten Kreator</span>
+            </div>
+            <div class="card-body">
+                <h3>Tutorial Canva Dasar</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item marketing" onclick="openCourse(this)"
+             data-title="Fotografi Makanan Low Budget"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Teknik foto ikan marinasi agar terlihat menggiurkan. Pemanfaatan cahaya matahari dan piring putih sebagai properti."
+             data-pdf="Guide_Angle_Foto.pdf">
+            <div class="card-thumb" style="background: #e67e22;">
+                <i class="fas fa-camera"></i>
+                <span class="badge-level">Konten Kreator</span>
+            </div>
+            <div class="card-body">
+                <h3>Foto Produk Estetik</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item sales" onclick="openCourse(this)"
+             data-title="Copywriting Status WhatsApp"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Kumpulan kata-kata promosi (Caption) yang hipnotik. Cara membuat orang penasaran dan reply story WA Anda."
+             data-pdf="100_Headline_Promosi.pdf">
+            <div class="card-thumb" style="background: #c0392b;">
+                <i class="fab fa-whatsapp"></i>
+                <span class="badge-level">Copywriting</span>
+            </div>
+            <div class="card-body">
+                <h3>Jurus Status WA Laris</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item sales" onclick="openCourse(this)"
+             data-title="Handling Keberatan Konsumen"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Cara menjawab calon pembeli yang bilang 'Kok Mahal?', 'Nanti dulu ya', atau 'Tanya suami dulu'. Ubah keraguan menjadi pembelian."
+             data-pdf="Script_Balas_Chat.pdf">
+            <div class="card-thumb" style="background: #c0392b;">
+                <i class="fas fa-comments"></i>
+                <span class="badge-level">Negosiasi</span>
+            </div>
+            <div class="card-body">
+                <h3>Jawaban "Kok Mahal?"</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item ecommerce" onclick="openCourse(this)"
+             data-title="Daftar GoFood & GrabFood"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Tutorial langkah demi langkah mendaftarkan titik usaha rumahan Anda ke aplikasi ojek online agar bisa dijangkau warga sekecamatan."
+             data-pdf="Syarat_Daftar_Merchant.pdf">
+            <div class="card-thumb" style="background: #2980b9;">
+                <i class="fas fa-utensils"></i>
+                <span class="badge-level">Platform Food</span>
+            </div>
+            <div class="card-body">
+                <h3>Cara Masuk GoFood/Grab</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+        <div class="course-card filter-item ecommerce" onclick="openCourse(this)"
+             data-title="Optimasi Google Maps (GMB)"
+             data-video="https://www.youtube.com/embed/VIDEO_ID_HERE"
+             data-desc="Cara membuat toko Anda muncul paling atas saat orang cari 'Jual Ikan Terdekat'. Teknik mengumpulkan ulasan positif."
+             data-pdf="Checklist_Google_Bisnis.pdf">
+            <div class="card-thumb" style="background: #2980b9;">
+                <i class="fas fa-map-marked-alt"></i>
+                <span class="badge-level">SEO Lokal</span>
+            </div>
+            <div class="card-body">
+                <h3>Google Maps Bisnis</h3>
+                <button class="btn-start">Pelajari</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+            <section id="page-payment" class="page-section" style="display:none;">
+                <h1>Setup Pembayaran</h1>
+                <div class="card-form">
+                    <div class="form-group"><label>E-Wallet / Bank</label><input type="text" id="payMethodName" placeholder="QRIS"></div>
+                    <div class="form-group"><label>No. E-Wallet / Rekening / Vitual Account</label><input type="text" id="payDetails"></div>
+                    <button class="btn-auth" onclick="savePaymentSettings()">Simpan</button>
+                </div>
+            </section>
+
+            <section id="page-profile" class="page-section" style="display:none;">
+                <h1>Profil Toko</h1>
+                <div class="card-form">
+                    <div class="form-group"><label>Nama Toko</label><input type="text" id="editShopName"></div>
+                    <div class="form-group"><label>No. Whatsapp</label><input type="tel" id="editShopPhone"></div>
+                    <button class="btn-auth" onclick="saveProfileSettings()">Update</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+<div id="claimModal">
+    <div class="card-form">
+        <span onclick="closeClaimModal()" class="close-btn">&times;</span>
+        
+        <div class="section-header">
+            <h2 style="font-size:1.5rem; color:var(--primary-color);">Klaim Reward</h2>
+            <p style="color:#666;">Cairkan poin stok Anda sekarang</p>
+        </div>
+        
+        <form id="claimForm">
+            <div class="form-group">
+                <label>Nama Mitra</label>
+                <input type="text" id="claimName" required placeholder="Nama Lengkap">
+            </div>
+            <div class="form-group">
+                <label>Nama Toko</label>
+                <input type="text" id="claimShop" readonly style="background:#f3f4f6;">
+            </div>
+            <div class="form-group">
+                <label>Jumlah Reward</label>
+                <input type="text" id="claimAmount" readonly style="background:#e0e7ff; color:#1e3a8a; font-weight:bold;">
+            </div>
+            <div class="form-group">
+                <label>Info Pembayaran</label>
+                <input type="text" id="claimPayment" readonly style="background:#f3f4f6;">
+            </div>
+            <button type="submit" class="btn-auth">Ajukan Klaim</button>
+        </form>
+    </div>
+</div>
+
+
+
+            <div id="courseModal" class="modal-course">
+                <div class="course-content">
+                    <span class="close-course" onclick="closeCourse()">&times;</span>
+                    
+                    <div class="video-wrapper">
+                        <iframe id="courseFrame" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="course-text">
+                        <h2 id="cTitle">Judul Materi</h2>
+                        <div class="course-tags">
+                            <span class="tag"><i class="fas fa-video"></i> Video HD</span>
+                            <span class="tag"><i class="fas fa-book-open"></i> Materi Teks</span>
+                        </div>
+                        <p id="cDesc">Deskripsi materi akan muncul di sini...</p>
+                        
+                        <hr>
+                        
+                        <div class="download-section">
+                            <p><strong>Materi Pendukung:</strong></p>
+                            <a id="cPdf" href="#" class="btn-download" download>
+                                <i class="fas fa-file-download"></i> Download PDF / Modul
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <script type="module" src="dashboard-firebase.js"></script>
+</body>
+</html>

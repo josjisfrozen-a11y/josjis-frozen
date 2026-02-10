@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josjis Frozen - Bisnis Olahan Lele dan Seafood</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Josjis<span>Frozen</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#reseller">Kemitraan</a></li>
+                <li><a href="dashboard.html" class="btn-nav">Mitra Josjis</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Bisnis Olahan Lele dan Seafood Masa Depan</h1>
+            <p>Bergabunglah menjadi mitra Josjis Frozen. Dari kolam sendiri, untuk kesejahteraan bersama.</p>
+            <a href="#reseller" class="btn-primary">Daftar Reseller Sekarang <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </header>
+
+<section id="produk" class="section-product-display">
+    <div class="container">
+        <div class="product-showcase">
+            
+            <div class="showcase-left">
+                <div class="main-image-box">
+                    <div class="image-overlay-bg"></div>
+                    <div class="image-wrapper">
+                        <img src="assets/lele-marinasi-1.jpeg" alt="Lele Marinasi Josjis" class="product-hero-img">
+                    </div>
+                    
+                    <div class="hero-badges">
+                        <span class="badge-pill green">Best Seller</span>
+                        <span class="badge-pill blue">100% Halal</span>
+                    </div>
+                </div>
+
+                <div class="thumb-grid">
+                    <div class="thumb-item"><img src="assets/lele-marinasi-1.jpeg" alt="Thumb 1"></div>
+                    <div class="thumb-item"><img src="assets/lele-marinasi-1.jpeg" alt="Thumb 2"></div> 
+                    <div class="thumb-item"><img src="assets/lele-marinasi-1.jpeg" alt="Thumb 3"></div>
+                </div>
+            </div>
+
+            <div class="showcase-right">
+                <div class="rating-box">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="review-count">(128 ulasan pembeli)</span>
+                </div>
+
+                <h1 class="product-title">Lele Marinasi Istimewa</h1>
+                <p class="product-desc">
+                    Lele segar pilihan yang dibersihkan secara higienis dan dimarinasi dengan bumbu rempah alami rahasia Josjis. Tanpa pengawet, praktis, dan siap goreng.
+                </p>
+
+                <div class="price-box-featured">
+                    <div class="price-row">
+                        <span class="price-val">Rp 11.000</span>
+                        <span class="price-unit">/ Pack</span>
+                    </div>
+                    <p class="stock-status">Stok tersedia & siap kirim hari ini</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feat-item">
+                        <i class="fas fa-shield-alt"></i> <span>Bumbu Rempah Alami</span>
+                    </div>
+                    <div class="feat-item">
+                        <i class="fas fa-snowflake"></i> <span>Teknologi Frozen Terjaga</span>
+                    </div>
+                    <div class="feat-item">
+                        <i class="fas fa-clock"></i> <span>Siap Saji dalam 10 Menit</span>
+                    </div>
+                    <div class="feat-item">
+                        <i class="fas fa-wind"></i> <span>Kemasan Vacuum Kedap</span>
+                    </div>
+                </div>
+
+                <div class="specs-box">
+                    <h4><i class="fas fa-check-circle"></i> Informasi Produk</h4>
+                    <div class="spec-row">
+                        <span class="label">Berat Bersih</span>
+                        <span class="val">500gr (Isi 3-4 Ekor)</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="label">Masa Simpan</span>
+                        <span class="val">6 Bulan (Suhu Frozen)</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="label">Sertifikasi</span>
+                        <span class="val">Halal & Higienis</span>
+                    </div>
+                </div>
+
+                <div class="action-area">
+                    <div class="qty-selector">
+                        <button onclick="updateDisplayQty(-1)">-</button>
+                        <span id="displayQty">1</span>
+                        <button onclick="updateDisplayQty(1)">+</button>
+                    </div>
+                    <a href="#" id="btnPesanWA" class="btn-pesan-wa">
+                        Pesan via WhatsApp <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <div class="more-detail-link">
+                    <a href="#" class="trigger-modal-manual" 
+                       data-name="Lele Marinasi Frozen"
+                       data-price="Rp 11.000"
+                       data-desc="Lele segar pilihan..." 
+                       data-image="assets/lele-marinasi-1.jpeg"
+                       data-halal="ID3511000123456"
+                       data-nutrition="Protein: 54g | Lemak: 15g"
+                       data-comp="Lele, Kunyit, Ketumbar...">
+                       Lihat Detail Nutrisi Lengkap
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="cooking-section">
+        <div class="container">
+            <div class="cooking-header">
+                <h2>Sajian Lezat Hanya 3 Langkah</h2>
+                <p>Tak perlu repot meracik bumbu, serahkan pada Josjis.</p>
+            </div>
+            <div class="cooking-steps">
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-snowflake"></i></div>
+                    <h3>01. Thawing</h3>
+                    <p>Keluarkan lele dari freezer dan diamkan sejenak hingga suhu ruang.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-fire"></i></div>
+                    <h3>02. Goreng/Bakar</h3>
+                    <p>Panaskan minyak atau grill, masak lele hingga warna keemasan.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>03. Sajikan</h3>
+                    <p>Lele krispi gurih siap dinikmati dengan sambal andalan keluarga.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="tentang" class="section-about">
+        <div class="container about-container">
+            <div class="about-img-wrapper">
+                <img src="assets/kolam-lele.jpg" alt="Kolam Lele Josjis Frozen" class="about-img">
+                <div class="experience-badge">
+                    <span class="count">100%</span>
+                    <span class="text">Segar & Higienis</span>
+                </div>
+            </div>
+
+            <div class="about-text">
+                <h4 class="sub-title">Kenapa Memilih Kami?</h4>
+                <h2 class="main-title">Pelopor Olahan Lele Modern</h2>
+                <p class="description">
+                    <strong> Josjis Frozen </strong>  menghadirkan standar baru dalam industri olahan ikan lele, nila dan gurame serta seafood lainnya. 
+                    Kami mengelola rantai pasok dari hulu ke hilir—mulai dari pakan, pembibitan, hingga panen—untuk memastikan kualitas rasa dan nutrisi terbaik di meja makan Anda.
+                </p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <i class="fas fa-check-circle icon-check"></i>
+                        <div>
+                            <strong>Kolam Terkontrol</strong>
+                            <br><small>Budidaya mandiri dengan standar air bersih.</small>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle icon-check"></i>
+                        <div>
+                            <strong>Proses Higienis</strong>
+                            <br><small>Diproses cepat dengan standar keamanan pangan.</small>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle icon-check"></i>
+                        <div>
+                            <strong>Mitra Terpercaya</strong>
+                            <br><small>Siap menyuplai kebutuhan rumah tangga & bisnis.</small>
+                        </div>
+                    </li>
+                </ul>
+
+                <a href="#kontak" class="btn-primary">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+<section id="reseller" class="section-reseller">
+    <div class="container">
+        <div class="reseller-header">
+            <span class="badge-pill">Peluang Kemitraan</span>
+            <h2>Gabung Menjadi Reseller <span class="text-highlight">Josjis Frozen</span></h2>
+            <p>Mulai bisnis olahan ikan lele Anda sendiri dengan modal terjangkau dan dukungan pemasaran penuh.</p>
+        </div>
+
+        <div class="pricing-grid">
+            
+            <div class="pricing-card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="icon-box light-blue"><i class="fas fa-fish"></i></div>
+                        <div class="discount-badge"><i class="fas fa-percent"></i> Hemat 47%</div>
+                    </div>
+                    
+                    <h3 class="pkg-name">Paket Starter</h3>
+                    <p class="pkg-tagline">Langkah awal jadi pengusaha</p>
+                    
+                    <div class="pkg-price-box">
+                        <span class="original-price">Rp 180.000</span>
+                        <span class="final-price">Rp 95.000</span>
+                    </div>
+
+                    <div class="pkg-features">
+                        <p class="feature-title">APA YANG ANDA DAPATKAN:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Lele Marinasi Berkualitas</li>
+                            <li><i class="fas fa-check-circle"></i> Mentoring Eksklusif 6 Bulan</li>
+                            <li><i class="fas fa-check-circle"></i> Pembuatan Email & Sosmed</li>
+                            <li><i class="fas fa-check-circle"></i> Iklan & Website Lifetime</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="btn-price-action btn-dark btn-join-reseller" data-paket="Paket Starter">Daftar Sekarang</button>
+                </div>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="popular-badge"><i class="fas fa-award"></i> REKOMENDASI UTAMA</div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="icon-box solid-blue"><i class="fas fa-chart-line"></i></div>
+                        <div class="discount-badge"><i class="fas fa-percent"></i> Hemat 56%</div>
+                    </div>
+                    
+                    <h3 class="pkg-name">Paket Business</h3>
+                    <p class="pkg-tagline">Pilihan paling populer & hemat</p>
+                    
+                    <div class="pkg-price-box">
+                        <span class="original-price">Rp 325.000</span>
+                        <span class="final-price">Rp 142.000</span>
+                    </div>
+
+                    <div class="pkg-features">
+                        <p class="feature-title">APA YANG ANDA DAPATKAN:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle check-blue"></i> Lele Marinasi Berkualitas</li>
+                            <li><i class="fas fa-check-circle check-blue"></i> Dashboard Penjualan Digital</li>
+                            <li><i class="fas fa-check-circle check-blue"></i> Pelatihan Digital Marketing</li>
+                            <li><i class="fas fa-check-circle check-blue"></i> Mentoring Bisnis 3 Bulan</li>
+                            <li><i class="fas fa-check-circle check-blue"></i> Reward Rp 20rb (Tiap 50 Order)</li>
+                            <li><i class="fas fa-check-circle check-blue"></i> Full Akses Lifetime</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="btn-price-action btn-blue btn-join-reseller" data-paket="Paket Business">Daftar Sekarang</button>
+                </div>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="icon-box light-blue"><i class="fas fa-store"></i></div>
+                        <div class="discount-badge"><i class="fas fa-percent"></i> Hemat 38%</div>
+                    </div>
+                    
+                    <h3 class="pkg-name">Paket Premium</h3>
+                    <p class="pkg-tagline">Fasilitas lengkap siap jualan</p>
+                    
+                    <div class="pkg-price-box">
+                        <span class="original-price">Rp 820.000</span>
+                        <span class="final-price">Rp 505.000</span>
+                    </div>
+
+                    <div class="pkg-features">
+                        <p class="feature-title">APA YANG ANDA DAPATKAN:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Lele Marinasi & Banner</li>
+                            <li><i class="fas fa-check-circle"></i> Meja Display & QRIS Akrilik</li>
+                            <li><i class="fas fa-check-circle"></i> Poster, ID Card & Gabus</li>
+                            <li><i class="fas fa-check-circle"></i> Dashboard & Pelatihan</li>
+                            <li><i class="fas fa-check-circle"></i> Mentoring & Lokasi Strategis</li>
+                            <li><i class="fas fa-check-circle"></i> Full Setup Marketing</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button class="btn-price-action btn-dark btn-join-reseller" data-paket="Paket Premium">Daftar Sekarang</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="trust-badges">
+            <div class="trust-item">
+                <i class="fas fa-fish"></i>
+                <span>Produk Higienis</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-globe"></i>
+                <span>Support Digital</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-users"></i>
+                <span>Komunitas Aktif</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-columns"></i>
+                <span>Sistem Terintegrasi</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <footer id="kontak">
+    <div class="container">
+        <div class="footer-grid">
+            
+            <div class="footer-col">
+                <div class="footer-logo">
+                    Josjis<span>Frozen</span>
+                </div>
+                <p class="footer-desc">
+                    Pelopor olahan ikan lele, nila, gurame dan seafood modern yang higienis, praktis, dan bergizi. 
+                    Solusi tepat untuk kebutuhan lauk keluarga Indonesia.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Tautan Cepat</h3>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+                    <li><a href="#tentang"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                    <li><a href="#produk"><i class="fas fa-chevron-right"></i> Produk Unggulan</a></li>
+                    <li><a href="#" class="trigger-modal-reseller"><i class="fas fa-chevron-right"></i> Gabung Reseller</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Hubungi Kami</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>
+                            <strong>Rumah Produksi:</strong><br>
+                            Jl. Dungus, 21/05 Sukodono,<br>
+                            Kec. Sukodono, Kab. Sidoarjo, Jawa Timur.
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+62 851-96177660 (WhatsApp)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>josjisfrozen@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="copyright-bar">
+        <div class="container copyright-content">
+            <p>&copy; 2024 Josjis Frozen. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <span>|</span>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div class="floating-cart" id="openCartBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-content">
+            <span class="close-modal close-cart">&times;</span>
+            <div class="modal-header">
+                <h2>Keranjang Belanja</h2>
+            </div>
+            <div class="cart-items" id="cartItemsContainer">
+                <p class="empty-msg">Keranjang masih kosong.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="total-price">
+                    <span>Total:</span>
+                    <span id="cartTotal">Rp 0</span>
+                </div>
+                <button class="btn-primary full-width" id="toCheckoutBtn">Lanjut ke Pembayaran</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content checkout-content">
+            <span class="close-modal close-checkout">&times;</span>
+            <div class="modal-header">
+                <h2>Data Pengiriman</h2>
+                <p>Lengkapi data untuk estimasi ongkir</p>
+            </div>
+<form id="checkoutForm" class="checkout-form">
+                <h4 class="form-section-title">Data Penerima</h4>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="custName" placeholder="Nama penerima paket" required>
+                </div>
+                <div class="form-group">
+                    <label>No. WhatsApp Aktif</label>
+                    <input type="tel" id="custPhone" placeholder="0812xxxx (Wajib Aktif)" required>
+                </div>
+
+                <h4 class="form-section-title">Alamat Pengiriman</h4>
+                
+                <div class="form-group">
+                    <label>Provinsi</label>
+                    <input type="text" id="addrProv" placeholder="Contoh: Jawa Timur" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Kota/Kabupaten</label>
+                        <input type="text" id="addrCity" placeholder="Contoh: Surabaya" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>Kecamatan</label>
+                        <input type="text" id="addrDistrict" placeholder="Contoh: Sukolilo" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Kelurahan/Desa</label>
+                        <input type="text" id="addrVillage" placeholder="Contoh: Keputih" required>
+                    </div>
+                    <div class="form-group quarter">
+                        <label>RT</label>
+                        <input type="number" id="addrRT" placeholder="001" required>
+                    </div>
+                    <div class="form-group quarter">
+                        <label>RW</label>
+                        <input type="number" id="addrRW" placeholder="005" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nama Jalan & Nomor Rumah</label>
+                    <textarea id="addrStreet" rows="2" placeholder="Jln. Mawar No. 12, Pagar Hitam..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Link Google Maps (Agar kurir cepat sampai)</label>
+                    <input type="text" id="custMaps" placeholder="Salin link lokasi dari Google Maps (Opsional)">
+                </div>
+
+                <h4 class="form-section-title">Metode Pembayaran</h4>
+                <div class="form-group">
+                    <select id="custPayment" required>
+                        <option value="Transfer Bank">Transfer Bank (BCA/Mandiri)</option>
+                        <option value="QRIS">QRIS (GoPay/OVO/Dana)</option>
+                        <option value="COD">COD (Bayar di Tempat)</option>
+                    </select>
+                </div>
+
+                <div class="checkout-summary">
+                    <div class="summary-row">
+                        <span>Subtotal Produk:</span>
+                        <span id="summarySubtotal">Rp 0</span>
+                    </div>
+                    <div class="summary-row highlight">
+                        <span>Ongkir:</span>
+                        <span>Dihitung Admin via WA</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total Sementara:</span>
+                        <span id="summaryTotal">Rp 0</span>
+                    </div>
+                    <small style="display:block; margin-top:5px; color:#666; font-style:italic;">*Total final + Ongkir akan diinfokan admin setelah pesanan masuk.</small>
+                </div>
+
+                <button type="submit" class="btn-primary full-width" style="margin-top: 15px;">
+                    <i class="fab fa-whatsapp"></i> Buat Pesanan
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+<div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-img">
+                    <img id="m-image" src="" alt="Produk Detail">
+                </div>
+                <div class="modal-info">
+                    <h2 id="m-name">Nama Produk</h2>
+                    <p class="halal-badge"><i class="fas fa-certificate"></i> Halal No: <span id="m-halal">-</span></p>
+                    <div class="price-tag" id="m-price">Rp 0</div>
+                    
+                    <div class="detail-section">
+                        <h4>Deskripsi</h4>
+                        <p id="m-desc">Deskripsi produk...</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Komposisi</h4>
+                        <p id="m-comp" class="text-sm">-</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Indeks Kandungan</h4>
+                        <div id="m-nutrition" class="nutrition-box">-</div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <a id="m-link" href="#" target="_blank" class="btn-modal-cart">
+                            <i class="fas fa-cart-plus"></i> Masukkan Keranjang (Order)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="partnershipModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-partnership">
+        <span class="close-modal close-partner">&times;</span>
+        
+        <div id="step1" class="step-content active">
+            <div class="modal-header-simple">
+                <h3>LANGKAH 1/3: PAKTA INTEGRITAS</h3>
+                <p>Harap baca dan setujui ketentuan di bawah ini.</p>
+            </div>
+            <div class="legal-scroll-box">
+                <h4>PAKTA INTEGRITAS CALON MITRA</h4>
+                <p>Dengan memutuskan untuk bergabung menjadi Reseller Resmi Josjis Frozen, saya yang bertanda tangan secara digital di bawah ini menyatakan dengan sadar dan tanpa paksaan bahwa:</p>
+                <ol>
+                    <li><strong>DATA VALID:</strong> Seluruh data dan informasi yang saya berikan dalam formulir pendaftaran ini adalah BENAR dan dapat dipertanggungjawabkan.</li>
+                    <li><strong>JAMINAN KUALITAS (COLD CHAIN):</strong> Saya mengerti bahwa Josjis Frozen adalah produk beku. Saya berkomitmen penuh untuk menjaga suhu penyimpanan produk (beku) sesuai standar agar kualitas tetap terjaga hingga ke tangan konsumen. Kerusakan akibat kelalaian penyimpanan adalah tanggung jawab saya sepenuhnya.</li>
+                    <li><strong>ETIKA HARGA:</strong> Saya bersedia mematuhi ketentuan harga jual yang disarankan (HET) dan TIDAK AKAN melakukan banting harga (predatory pricing) yang dapat merusak pasar dan merugikan mitra reseller lain.</li>
+                    <li><strong>REPUTASI BRAND:</strong> Saya berjanji akan menjaga nama baik brand Josjis Frozen dalam setiap promosi dan pelayanan kepada pelanggan, serta tidak mencampuradukkan dengan produk lain yang tidak jelas kualitasnya.</li>
+                    <li><strong>SANKSI:</strong> Apabila di kemudian hari saya terbukti melanggar poin-poin di atas, saya bersedia menerima sanksi berupa teguran hingga pemutusan hubungan kemitraan (Blacklist) oleh Manajemen Josjis Frozen.</li>
+                </ol>
+            </div>
+            <div class="agreement-check">
+                <input type="checkbox" id="agreePakta">
+                <label for="agreePakta"><strong>SAYA SETUJU & MENGERTI</strong> (Dengan mencentang kotak ini, saya menyetujui seluruh poin di atas).</label>
+            </div>
+            <button class="btn-primary full-width" id="btnToStep2" disabled>LANJUT ISI FORMULIR <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div id="step2" class="step-content">
+            <div class="modal-header-simple">
+                <h3>LANGKAH 2/3: DATA DIRI & USAHA</h3>
+            </div>
+            <form id="partnerForm" class="scrollable-form">
+                <h5 class="form-section-head">A. Data Pribadi</h5>
+                <div class="form-group">
+                    <label>Nama Lengkap (Sesuai KTP)</label>
+                    <input type="text" id="p_nama" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>NIK / KTP</label>
+                        <input type="number" id="p_nik" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>No. WhatsApp</label>
+                        <input type="number" id="p_wa" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Domisili Lengkap</label>
+                    <textarea id="p_alamat" rows="2" placeholder="Jalan, RT/RW, Kel, Kec, Kota..." required></textarea>
+                </div>
+
+                <h5 class="form-section-head">B. Data Usaha</h5>
+                <div class="form-group">
+                    <label>Pengalaman Jualan Frozen Food?</label>
+                    <select id="p_pengalaman">
+                        <option value="Belum">Belum</option>
+                        <option value="Sudah">Sudah</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Rencana Lokasi Jualan</label>
+                    <select id="p_lokasi">
+                        <option value="Rumah Pribadi">Rumah Pribadi</option>
+                        <option value="Toko / Kios">Toko / Kios / Warung</option>
+                        <option value="Online">Online (Tanpa Toko Fisik)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fasilitas Penyimpanan (Freezer)</label>
+                    <select id="p_freezer">
+                        <option value="Kulkas Rumah Tangga">Kulkas Rumah Tangga (Campur)</option>
+                        <option value="Freezer Box Khusus">Memiliki Freezer Box Khusus</option>
+                        <option value="Belum Punya">Belum Punya (Akan beli)</option>
+                    </select>
+                </div>
+
+                <input type="hidden" id="p_paket_pilihan">
+
+                <div class="btn-group-step">
+                    <button type="button" class="btn-outline" id="btnBackToStep1">Kembali</button>
+                    <button type="submit" class="btn-primary" id="btnToStep3">Lanjut ke MoU <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </form>
+        </div>
+
+        <div id="step3" class="step-content">
+            <div class="modal-header-simple">
+                <h3>LANGKAH 3/3: TANDA TANGAN MoU</h3>
+                <p>Surat Perjanjian Kerjasama ini otomatis terisi data Anda.</p>
+            </div>
+            
+            <div class="legal-scroll-box mou-box">
+                <div id="mouContent">
+                    <h4 style="text-align:center;">SURAT PERJANJIAN KERJASAMA (MoU)<br>KEMITRAAN RESELLER JOSJIS FROZEN</h4>
+                    <p style="text-align:center;">Nomor: <span id="mou_no">XXX/JS/2024</span></p>
+                    <br>
+                    <p>Pada hari ini, <span id="mou_date">...</span>, kami yang bertanda tangan di bawah ini:</p>
+                    
+                    <p>1. <strong>Manajemen JOSJIS FROZEN</strong> (Pihak Pertama / Supplier)</p>
+                    <p>2. <strong><span id="mou_nama_mitra">...</span></strong>, NIK: <span id="mou_nik_mitra">...</span> (Pihak Kedua / Reseller)</p>
+                    
+                    <p>Kedua belah pihak sepakat mengikat diri dalam perjanjian kerjasama penjualan produk Josjis Frozen.</p>
+                    
+                    <h5>PASAL RINGKAS (Intisari):</h5>
+                    <ul>
+                        <li><strong>Penyimpanan:</strong> Pihak Kedua WAJIB menjaga suhu beku produk. Kerusakan akibat penyimpanan adalah tanggung jawab Pihak Kedua.</li>
+                        <li><strong>Harga:</strong> Pihak Kedua WAJIB mengikuti HET dan DILARANG banting harga.</li>
+                        <li><strong>Pemesanan:</strong> Sistem pembayaran LUNAS di muka (Cash Before Delivery).</li>
+                        <li><strong>Retur:</strong> Barang tidak laku TIDAK BISA diretur. Retur hanya jika barang rusak dari pusat.</li>
+                    </ul>
+                    
+                    <p>Demikian surat perjanjian ini disepakati secara sadar.</p>
+                </div>
+            </div>
+
+            <div class="signature-area">
+                <p class="sm-text">Dengan menekan tombol di bawah, saya menandatangani dokumen ini secara digital.</p>
+                <div class="form-group">
+                    <label>Ketik Nama Lengkap Anda sebagai Tanda Tangan:</label>
+                    <input type="text" id="digital_signature" placeholder="Ketik nama lengkap..." required style="border-bottom: 2px solid var(--primary-color); background: #f0fdf4;">
+                </div>
+            </div>
+
+            <div class="btn-group-step">
+                <button type="button" class="btn-outline" id="btnBackToStep2">Kembali</button>
+                <button type="button" class="btn-primary full-width" id="btnFinalSubmit">
+                    <i class="fas fa-file-signature"></i> SAHKAN & KIRIM PERMOHONAN
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
